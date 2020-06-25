@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView mic;
     TextView userTextTv,agentTextTv;
     TextToSpeech tts;
+    String searchEngine;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,39 @@ public class MainActivity extends AppCompatActivity {
                 tts.speak(result.getResult().getFulfillment().getSpeech(),TextToSpeech.QUEUE_ADD,null,null);
                 agentTextTv.setText(result.getResult().getFulfillment().getSpeech());
                 userTextTv.setText(result.getResult().getResolvedQuery());
+                if(result.getResult().getAction().equals("websearch")){
+                    String query = result.getResult().getStringParameter("any","none");
+                    if(!query.equals("none")) {
+                        searchEngine = result.getResult().getStringParameter("search-engine", "google");
+                        String url = "";
+                        if (searchEngine.equals("google")) {
+                            url = "https://www.google.com/search?q=" + query;
+                        } else if (searchEngine.equals("yahoo")) {
+                            url = "https://search.yahoo.com/search?p=" + query;
+                        } else if (searchEngine.equals("bing")) {
+                            url = "https://www.bing.com/search?q=" + query;
+                        }
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                }else if(result.getResult().getAction().equals("websearchfollowup")){
+                    String query = result.getResult().getStringParameter("any");
+                    if(!query.equals("none")) {
+                        String url = "";
+                        if (searchEngine.equals("google")) {
+                            url = "https://www.google.com/search?q=" + query;
+                        } else if (searchEngine.equals("yahoo")) {
+                            url = "https://search.yahoo.com/search?p=" + query;
+                        } else if (searchEngine.equals("bing")) {
+                            url = "https://www.bing.com/search?q=" + query;
+                        }
+
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                }
             }
 
             @Override
@@ -80,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tts.stop();
                 aiService.startListening();
             }
         });
