@@ -19,6 +19,10 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
+//https://www.google.com/search?q=apple
+//https://search.yahoo.com/search?p=apple
+//https://www.bing.com/search?q=apple
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView mic;
@@ -91,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if(result.getResult().getAction().equals("make_call") || result.getResult().getAction().equals("make_call_followup")){
                     Call call = new Call(getApplicationContext(),tts);
                     call.initiateCallProcess(result.getResult());
+                }else if(result.getResult().getAction().equals("send_sms")){
+                    Sms sms = new Sms(getApplicationContext(),tts);
+                    sms.initiateSmsProcess(result.getResult());
                 }
             }
 
