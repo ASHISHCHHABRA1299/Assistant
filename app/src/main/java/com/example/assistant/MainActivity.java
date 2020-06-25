@@ -88,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 }else if(result.getResult().getAction().equals("app_launch")){
                     LaunchingSystem ls = new LaunchingSystem(getApplicationContext(),tts);
                     ls.initialteLaunchingProcess(result.getResult());
+                }else if(result.getResult().getAction().equals("make_call") || result.getResult().getAction().equals("make_call_followup")){
+                    Call call = new Call(getApplicationContext(),tts);
+                    call.initiateCallProcess(result.getResult());
                 }
             }
 
