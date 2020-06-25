@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/mic"
+        android:id="@+id/mic1"
         android:layout_width="153dp"
         android:layout_height="154dp"
-        android:src="@drawable/mic1"
+        android:src="@drawable/mic23"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mic"
+        app:layout_constraintTop_toBottomOf="@+id/mic1"
         app:layout_constraintVertical_bias="0.757" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:text="My Name is Jarvis"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/mic"
+        app:layout_constraintBottom_toTopOf="@+id/mic1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
