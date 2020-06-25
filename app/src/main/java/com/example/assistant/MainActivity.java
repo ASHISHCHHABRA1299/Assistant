@@ -31,7 +31,15 @@ public class MainActivity extends AppCompatActivity {
         userTextTv=(TextView)findViewById(R.id.textView);
         agentTextTv=(TextView)findViewById(R.id.textView2);
 
-       
+        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR){
+                    tts.setLanguage(Locale.UK);
+                }
+            }
+        });
+
         final AIConfiguration config = new AIConfiguration( "a39d7fe005894a6980d880095fe16032",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         aiService.setListener(new AIListener() {
             @Override
             public void onResult(AIResponse result) {
+                tts.speak(result.getResult().getFulfillment().getSpeech(),TextToSpeech.QUEUE_ADD,null,null);
                 agentTextTv.setText(result.getResult().getFulfillment().getSpeech());
                 userTextTv.setText(result.getResult().getResolvedQuery());
             }
