@@ -85,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                         i.setData(Uri.parse(url));
                         startActivity(i);
                     }
+                }else if(result.getResult().getAction().equals("app_launch")){
+                    LaunchingSystem ls = new LaunchingSystem(getApplicationContext(),tts);
+                    ls.initialteLaunchingProcess(result.getResult());
                 }
             }
 
