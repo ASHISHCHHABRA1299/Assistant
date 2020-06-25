@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:gravity="center|center_vertical"
         android:text="My Name is Jarvis"
+        android:padding="10dp"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/mic1"

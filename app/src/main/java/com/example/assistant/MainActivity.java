@@ -10,14 +10,18 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView mic;
     TextView userTextTv,agentTextTv;
+    TextToSpeech tts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         mic=(ImageView)findViewById(R.id.mic1);
         userTextTv=(TextView)findViewById(R.id.textView);
         agentTextTv=(TextView)findViewById(R.id.textView2);
+
+       
         final AIConfiguration config = new AIConfiguration( "a39d7fe005894a6980d880095fe16032",
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
